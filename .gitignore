@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# macOS
+.DS_Store
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Local packet captures
+*.pcap
+*.pcapng
+*.cap
+
+# Local uploads
+uploads/
+temp/
+tmp/
+
+# RAG / local AI data
+chroma_db/
+chroma_data/
+knowledge/
+
+# Environment variables / secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Logs
+*.log
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Test/cache
+.pytest_cache/
+.coverage
+
+# Local llama.cpp installation
+llama.cpp/
+

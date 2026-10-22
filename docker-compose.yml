@@ -1,0 +1,25 @@
+services:
+  pcap-insight:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      PCAP_MAX_UPLOAD_MB: "512"
+      TSHARK_TIMEOUT: "300"
+      PCAP_MAX_TABLE_ROWS: "20000"
+      PCAP_MAX_BODY_BYTES: "65536"
+      PCAP_AI_BASE_URL: "${PCAP_AI_BASE_URL:-http://127.0.0.1:11434}"
+      PCAP_AI_CHAT_URL: "${PCAP_AI_CHAT_URL:-}"
+      PCAP_AI_MODEL: "${PCAP_AI_MODEL:-qwen2.5:7b}"
+      PCAP_AI_API_STYLE: "${PCAP_AI_API_STYLE:-auto}"
+      PCAP_AI_ALLOW_REMOTE: "${PCAP_AI_ALLOW_REMOTE:-false}"
+      PCAP_AI_API_KEY: "${PCAP_AI_API_KEY:-}"
+      PCAP_AI_INCLUDE_BODIES: "${PCAP_AI_INCLUDE_BODIES:-false}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=1g,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped

@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "file": "synthetic_all_protocols.pcap",
+    "path": "synthetic_all_protocols.pcap (6434 bytes, analysed locally in browser)",
+    "packets": 42,
+    "start": 1760250000.123,
+    "end": 1760250003.198,
+    "duration": 3.075000047683716,
+    "linktypes": {
+      "1": 42
+    },
+    "generated": "2026-10-12 06:12:19",
+    "events_dropped": 0
+  },
+  "protocols": {
+    "PPPoE-Session": 11,
+    "DNS": 8,
+    "PPPoE-Discovery": 5,
+    "PPP-LCP": 5,
+    "DHCPv4": 4,
+    "DHCPv6": 4,
+    "PPP-PAP": 2,
+    "PPP-IPCP": 2,
+    "PPP-IPv6CP": 2,
+    "LLMNR": 2,
+    "mDNS": 2,
+    "HTTP-Request": 2,
+    "TCP-7547": 1,
+    "HTTP-Response": 1
+  },
+  "dhcp4": [
+    {
+      "mac": "02:00:00:00:00:10",
+      "state": "Bound",
+      "messages": [
+        "DISCOVER",
+        "OFFER",
+        "REQUEST",
+        "ACK"
+      ]
+    }
+  ],
+  "dhcp6": [
+    {
+      "state": "Bound",
+      "messages": [
+        "SOLICIT",
+        "ADVERTISE",
+        "REQUEST",
+        "REPLY"
+      ]
+    }
+  ],
+  "ppp": [
+    {
+      "session_id": 16,
+      "phases": [
+        "Discovery",
+        "LCP",
+        "Auth (PAP)",
+        "IPCP",
+        "Opened (IPv4)",
+        "IPv6CP",
+        "Opened (IPv6)",
+        "Terminating",
+        "Terminated"
+      ],
+      "messages": [
+        {
+          "proto": "PPPoED",
+          "code": "PADI"
+        },
+        {
+          "proto": "PPPoED",
+          "code": "PADO"
+        },
+        {
+          "proto": "PPPoED",
+          "code": "PADR"
+        },
+        {
+          "proto": "PPPoED",
+          "code": "PADS"
+        },
+        {
+          "proto": "LCP",
+          "code": "Configure-Request"
+        },
+        {
+          "proto": "LCP",
+          "code": "Configure-Ack"
+        },
+        {
+          "proto": "PAP",
+          "code": "Authenticate-Request"
+        },
+        {
+          "proto": "PAP",
+          "code": "Authenticate-Ack"
+        },
+        {
+          "proto": "IPCP",
+          "code": "Configure-Request"
+        },
+        {
+          "proto": "IPCP",
+          "code": "Configure-Ack"
+        },
+        {
+          "proto": "IPv6CP",
+          "code": "Configure-Request"
+        },
+        {
+          "proto": "IPv6CP",
+          "code": "Configure-Ack"
+        },
+        {
+          "proto": "LCP",
+          "code": "Echo-Request"
+        },
+        {
+          "proto": "LCP",
+          "code": "Echo-Reply"
+        },
+        {
+          "proto": "LCP",
+          "code": "Terminate-Request"
+        },
+        {
+          "proto": "PPPoED",
+          "code": "PADT"
+        }
+      ]
+    }
+  ],
+  "dns": [
+    {
+      "qname": "tms.airtelbroadband.in",
+      "qtype": "A",
+      "rcode": "NOERROR",
+      "ipv4": [
+        "203.0.113.80"
+      ],
+      "ipv6": []
+    },
+    {
+      "qname": "tms.airtelbroadband.in",
+      "qtype": "AAAA",
+      "rcode": "NOERROR",
+      "ipv4": [],
+      "ipv6": [
+        "2001:db8::80"
+      ]
+    },
+    {
+      "qname": "broken.example",
+      "qtype": "A",
+      "rcode": "NXDOMAIN",
+      "ipv4": [],
+      "ipv6": []
+    },
+    {
+      "qname": "broken.example",
+      "qtype": "AAAA",
+      "rcode": "SERVFAIL",
+      "ipv4": [],
+      "ipv6": []
+    },
+    {
+      "qname": "gateway",
+      "qtype": "A",
+      "rcode": null,
+      "ipv4": [],
+      "ipv6": []
+    },
+    {
+      "qname": "gateway",
+      "qtype": "A",
+      "rcode": "NOERROR",
+      "ipv4": [
+        "192.168.1.1"
+      ],
+      "ipv6": []
+    }
+  ],
+  "mdnsPackets": 2,
+  "http": [
+    {
+      "method": "POST",
+      "url": "http://tms.airtelbroadband.in/acs",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://tms.airtelbroadband.in/acs",
+      "status": null
+    }
+  ],
+  "insights": [
+    {
+      "sev": "med",
+      "area": "DNS",
+      "text": "1 DNS query without response (e.g. gateway)"
+    },
+    {
+      "sev": "med",
+      "area": "DNS",
+      "text": "1 response(s) with NXDOMAIN"
+    },
+    {
+      "sev": "high",
+      "area": "DNS",
+      "text": "1 response(s) with SERVFAIL"
+    },
+    {
+      "sev": "med",
+      "area": "PPP",
+      "text": "Session 0x0010: PADT by server"
+    }
+  ]
+}

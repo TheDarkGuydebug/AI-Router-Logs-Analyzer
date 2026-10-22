@@ -1,0 +1,102 @@
+One-time setup
+Step 1: Install Wireshark (includes TShark)
+Download the macOS installer from https://www.wireshark.org/download.html and install it.
+Open Terminal (press Cmd+Space and type Terminal) and run:
+Shell
+tshark --version
+
+Why: The analyzer doesn't decode packets itself. It asks TShark for the fields of each protocol (DNS, DHCP, PPPoE and so on), so if TShark is missing, no analysis can run.
+
+Step 2: Check Python
+Shell
+python3 --version
+
+If you see a version such as Python 3.12.x, you're ready. If not, install Python from https://www.python.org/downloads/macos/.
+
+Why: The analyzer's backend (the Flask web server and the analysis logic) is written in Python.
+
+Step 3: Extract the analyzer
+Create a clean folder and extract the ZIP into it:
+Shell
+mkdir -p ~/pcap_analyser
+cd ~/pcap_analyser
+unzip ~/Downloads/PCAP_Insight_Workbench_v1.5.0.zip
+Go into the folder that contains pcap_insight.py:
+Shell
+cd pcap_insight
+ls
+You should see pcap_insight.py, requirements.txt and README.md.
+
+Why: Keeping each version in its own folder stops you accidentally running an older version.
+
+Step 4: Create a virtual environment
+Shell
+python3 -m venv .venv
+source .venv/bin/activate
+
+Your prompt should now start with (.venv).
+
+Why: A virtual environment is a private set of Python packages just for this tool. It keeps the analyzer's libraries separate from the rest of your Mac, so they don't conflict with other projects.
+
+Step 5: Install the required packages
+Shell
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+
+Why: requirements.txt lists the libraries the analyzer needs (mainly Flask, which serves the web page). This command installs them into the .venv you created.
+
+Step 6: Check that you have the right version
+Shell
+python3 pcap_insight.py --help
+
+The options should include --port and --ai-model.
+
+Why: If --ai-model is missing, you're in an old version's folder. Older builds have a different interface and no AI support.
+
+Step 7 (optional): Set up the local AI for Q&A
+Download Ollama for macOS from https://ollama.com/download, drag it into Applications and open it. A llama icon should appear in the menu bar.
+Download the model. It's about 4.7 GB.
+Shell
+ollama pull qwen2.5:7b
+If ollama says command not found, run:
+Shell
+echo 'export PATH="/Applications/Ollama.app/Contents/Resources:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+Check that it's working:
+Shell
+curl http://127.0.0.1:11434/api/tags
+The output should include qwen2.5:7b.
+
+Why: Ollama runs an AI model on your own Mac, so capture data never leaves the laptop. The analyzer sends the model only evidence taken from your PCAP, with passwords and other credentials masked, and the model has to cite frame numbers in its answers.
+
+4. Running the analyzer (every time)
+Step 1: Go to the folder and activate the environment
+Shell
+cd ~/pcap_analyser/pcap_insight
+source .venv/bin/activate
+
+Why: This uses the packages you installed in setup.
+
+Step 2: Start the server
+Shell
+python3 pcap_insight.py --port 8091
+
+Wait for:
+
+Plain Text
+Running on http://127.0.0.1:8091
+
+Keep this Terminal window open. Closing it stops the analyzer.
+
+Why: This starts a small web server on your Mac. 127.0.0.1 means it can only be reached from this laptop.
+
+Step 3: Open the interface
+
+Open a second Terminal window and run:
+
+Shell
+open "http://127.0.0.1:8091/"
+
+Or type http://127.0.0.1:8091 into your browser.
+
+Why: The analyzer doesn't open a browser automatically. The server only serves the page, so you have to open it yourself.
